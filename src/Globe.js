@@ -346,7 +346,7 @@ Globe.prototype.init = function(cb){
     // create the scene
     this.scene = new THREE.Scene();
 
-    this.scene.fog = new THREE.Fog( 0x000000, this.cameraDistance, this.cameraDistance+300 );
+    this.scene.fog = new THREE.Fog( 0x111111, this.cameraDistance, this.cameraDistance+300 );
 
     createIntroLines.call(this);
 
