@@ -453,11 +453,13 @@ Globe.prototype.addPin = function(lat, lon, text){
 
 }
 
-Globe.prototype.addMarker = function(lat, lon, text, connected){
+Globe.prototype.addMarker = function(lat, lon, text, connected, color){
+
+    color = (typeof color === 'undefined') ? this.markerColor : color;
 
     var marker;
     var opts = {
-        markerColor: this.markerColor,
+        markerColor: color,
         lineColor: this.markerColor,
         font: this.font
     };
