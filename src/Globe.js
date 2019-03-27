@@ -302,7 +302,8 @@ function Globe(width, height, opts){
         maxMarkers: 4,
         data: [],
         tiles: [],
-        viewAngle: 0
+        viewAngle: 0,
+        forceDisplayLabels: false
     };
 
     for(var i in defaults){
@@ -375,17 +376,16 @@ Globe.prototype.destroy = function(callback){
 
 };
 
-Globe.prototype.addPin = function(lat, lon, text, lineColor, topColor){
+Globe.prototype.addPin = function(lat, lon, text, color){
 
     lat = parseFloat(lat);
     lon = parseFloat(lon);
 
-    lineColor = (typeof lineColor === 'undefined') ? this.pinColor : lineColor; 
-    topColor = (typeof topColor === 'undefined') ? this.pinColor : topColor; 
+    color = (typeof color === 'undefined') ? this.pinColor : color; 
 
     var opts = {
-        lineColor: lineColor,
-        topColor: topColor,
+        lineColor: color,
+        topColor: color,
         font: this.font
     }
 
@@ -413,7 +413,7 @@ Globe.prototype.addPin = function(lat, lon, text, lineColor, topColor){
 
     this.quadtree.addObject(pin);
 
-    if(text.length > 0){
+    if(this.forceDisplayLabels === false && text.length > 0){
         var collisions = this.quadtree.getCollisionsForObject(pin);
         var collisionCount = 0;
         var tooYoungCount = 0;
