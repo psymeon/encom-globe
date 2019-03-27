@@ -76,8 +76,8 @@ var createParticles = function(){
     ].join("\n");
 
     var pointFragmentShader = [
-        "varying vec4 vColor;",     
-        "void main()", 
+        "varying vec4 vColor;",
+        "void main()",
         "{",
         "   gl_FragColor = vColor;",
         "   float depth = gl_FragCoord.z / gl_FragCoord.w;",
@@ -249,7 +249,7 @@ var createIntroLines = function(){
             var thisPoint = utils.mapPoint(lat, lon - j * 5);
             sPoint = new THREE.Vector3(thisPoint.x*this.introLinesAltitude, thisPoint.y*this.introLinesAltitude, thisPoint.z*this.introLinesAltitude);
 
-            geometry.vertices.push(sPoint);  
+            geometry.vertices.push(sPoint);
         }
 
         this.introLines.add(new THREE.Line(geometry, introLinesMaterial));
@@ -328,7 +328,7 @@ function Globe(width, height, opts){
     this.data.sort(function(a,b){return (b.lng - b.label.length * 2) - (a.lng - a.label.length * 2)});
 
     for(var i = 0; i< this.data.length; i++){
-        this.data[i].when = this.introLinesDuration*((180+this.data[i].lng)/360.0) + 500; 
+        this.data[i].when = this.introLinesDuration*((180+this.data[i].lng)/360.0) + 500;
     }
 
 
@@ -381,7 +381,7 @@ Globe.prototype.addPin = function(lat, lon, text, color){
     lat = parseFloat(lat);
     lon = parseFloat(lon);
 
-    color = (typeof color === 'undefined') ? this.pinColor : color; 
+    color = (typeof color === 'undefined') ? this.pinColor : color;
 
     var opts = {
         lineColor: color,
@@ -389,7 +389,8 @@ Globe.prototype.addPin = function(lat, lon, text, color){
         font: this.font
     }
 
-    var altitude = 1.2;
+    var rand = Math.random() / 4
+    var altitude = 1.1 + rand;
 
     if(typeof text != "string" || text.length === 0){
         altitude -= .05 + Math.random() * .05;
@@ -403,7 +404,7 @@ Globe.prototype.addPin = function(lat, lon, text, color){
 
     var pos = latLon2d(lat, lon);
 
-    pin.pos_ = new Vec2(parseInt(pos.x),parseInt(pos.y)); 
+    pin.pos_ = new Vec2(parseInt(pos.x),parseInt(pos.y));
 
     if(text.length > 0){
         pin.rad_ = pos.rad;
@@ -485,7 +486,7 @@ Globe.prototype.addMarker = function(lat, lon, text, connected, color){
 }
 
 Globe.prototype.addSatellite = function(lat, lon, altitude, opts, texture, animator){
-    /* texture and animator are optimizations so we don't have to regenerate certain 
+    /* texture and animator are optimizations so we don't have to regenerate certain
      * redundant assets */
 
     if(!opts){
