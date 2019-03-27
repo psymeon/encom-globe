@@ -375,14 +375,17 @@ Globe.prototype.destroy = function(callback){
 
 };
 
-Globe.prototype.addPin = function(lat, lon, text){
+Globe.prototype.addPin = function(lat, lon, text, lineColor, topColor){
 
     lat = parseFloat(lat);
     lon = parseFloat(lon);
 
+    lineColor = (typeof lineColor === 'undefined') ? this.pinColor : lineColor; 
+    topColor = (typeof topColor === 'undefined') ? this.pinColor : topColor; 
+
     var opts = {
-        lineColor: this.pinColor,
-        topColor: this.pinColor,
+        lineColor: lineColor,
+        topColor: topColor,
         font: this.font
     }
 
